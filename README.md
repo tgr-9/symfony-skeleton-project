@@ -18,7 +18,7 @@ If this a CLI-only application, remove references to PHP-FPM and Nginx:
 
 ```bash
 # Build docker containers
-> make up
+> make build-containers
 # Install dependencies
 > make composer arg="install"
 ```
