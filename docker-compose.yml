@@ -1,0 +1,32 @@
+services:
+  php-cli:
+    build: docker/php-cli
+    container_name: ${DOCKER_CONTAINER_BASE_NAME}-php-cli
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www
+    profiles: [on-demand]
+  php-fpm:
+    build: docker/php-fpm
+    container_name: ${DOCKER_CONTAINER_BASE_NAME}-php-fpm
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www
+    networks:
+      - ${DOCKER_CONTAINER_BASE_NAME}_app
+  nginx:
+    image: nginx:stable-alpine
+    container_name: ${DOCKER_CONTAINER_BASE_NAME}-nginx
+    volumes:
+      - ./public/:/var/www/public/
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "${DOCKER_NGINX_PORT}:80"
+    depends_on:
+      - php-fpm
+    working_dir: /var/www
+    networks:
+      - ${DOCKER_CONTAINER_BASE_NAME}_app
+
+networks:
+  ${DOCKER_CONTAINER_BASE_NAME}:
