@@ -25,7 +25,7 @@ phpunit:
 	@make dcr cmd="vendor/bin/phpunit -d --enable-pretty-print -d --compact $(arg)"
 
 phpstan:
-	vendor/bin/phpstan --memory-limit=1G $(arg)
+	@make dcr cmd="vendor/bin/phpstan --memory-limit=1G $(arg)"
 
 composer:
 	@make dcr cmd="composer $(arg)"

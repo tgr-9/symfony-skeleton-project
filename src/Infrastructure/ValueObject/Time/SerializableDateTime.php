@@ -18,11 +18,6 @@ class SerializableDateTime extends \DateTimeImmutable implements \JsonSerializab
         return new self($string, $timezone);
     }
 
-    public static function fromOptionalString(?string $string = null, ?SerializableTimezone $timezone = null): ?SerializableDateTime
-    {
-        return $string ? self::fromString($string, $timezone) : null;
-    }
-
     public static function fromTimestamp(int $unixTimestamp, SerializableTimezone $timezone): self
     {
         return self::fromString('now', $timezone)->setTimestamp($unixTimestamp);

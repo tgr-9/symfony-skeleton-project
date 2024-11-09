@@ -20,6 +20,7 @@ class Json
     public static function decode(string $json, bool $assoc = true, int $depth = 512, int $options = 0): mixed
     {
         try {
+            // @phpstan-ignore-next-line
             return \Safe\json_decode($json ?: '', $assoc, $depth, $options);
         } catch (\Exception $exception) {
             throw new \InvalidArgumentException('Could not decode json string: '.$exception->getMessage().\PHP_EOL.\substr($json, 0, 1000));

@@ -27,6 +27,7 @@ final readonly class ApplyRateLimitingListener implements EventSubscriberInterfa
         }
 
         $request = $event->getRequest();
+        /** @var string $controllerClass */
         $controllerClass = $request->attributes->get('_controller');
 
         if (!$rateLimiter = $this->rateLimiterUsage->getRateLimiter($controllerClass)) {

@@ -13,7 +13,7 @@ services:
       - ./:/var/www/
     working_dir: /var/www
     networks:
-      - ${DOCKER_CONTAINER_BASE_NAME}_app
+      - app_network
   nginx:
     image: nginx:stable-alpine
     container_name: ${DOCKER_CONTAINER_BASE_NAME}-nginx
@@ -26,7 +26,8 @@ services:
       - php-fpm
     working_dir: /var/www
     networks:
-      - ${DOCKER_CONTAINER_BASE_NAME}_app
+      - app_network
 
 networks:
-  ${DOCKER_CONTAINER_BASE_NAME}:
+  app_network:
+    name: ${DOCKER_CONTAINER_BASE_NAME}_app

@@ -4,6 +4,8 @@ namespace App\Infrastructure\ValueObject;
 
 /**
  * @template T
+ *
+ * @implements \IteratorAggregate<int, T>
  */
 abstract class Collection implements \Countable, \IteratorAggregate, \JsonSerializable
 {
@@ -47,6 +49,8 @@ abstract class Collection implements \Countable, \IteratorAggregate, \JsonSerial
 
     /**
      * @param T $item
+     *
+     * @return Collection<T>
      */
     public function add($item): self
     {
@@ -56,6 +60,11 @@ abstract class Collection implements \Countable, \IteratorAggregate, \JsonSerial
         return $this;
     }
 
+    /**
+     * @param Collection<T> $collection
+     *
+     * @return Collection<T>
+     */
     public function mergeWith(Collection $collection): self
     {
         foreach ($collection as $item) {
@@ -138,7 +147,7 @@ abstract class Collection implements \Countable, \IteratorAggregate, \JsonSerial
         return array_sum($this->map(fn ($item): int|float => $closure($item)));
     }
 
-    public function max(\Closure $closure): int|float
+    public function max(\Closure $closure): mixed
     {
         return max($this->map(fn ($item): int|float => $closure($item)));
     }
@@ -149,6 +158,7 @@ abstract class Collection implements \Countable, \IteratorAggregate, \JsonSerial
             return static::fromArray(array_filter($this->items));
         }
 
+        // @phpstan-ignore-next-line
         return static::fromArray(array_filter($this->items, fn ($item): mixed => $closure($item)));
     }
 

@@ -26,7 +26,7 @@ class RateLimiterCompilerPass implements CompilerPassInterface
             $controllerClass = $serviceDefinition->getClass();
             $reflectionClass = $container->getReflectionClass($controllerClass);
 
-            foreach ($reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC) as $reflectionMethod) {
+            foreach ($reflectionClass?->getMethods(\ReflectionMethod::IS_PUBLIC) ?? [] as $reflectionMethod) {
                 $attributes = $reflectionMethod->getAttributes(RateLimiter::class);
                 if (0 === \count($attributes)) {
                     continue;

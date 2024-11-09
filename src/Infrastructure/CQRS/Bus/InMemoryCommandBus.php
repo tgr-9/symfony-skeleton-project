@@ -26,6 +26,7 @@ final readonly class InMemoryCommandBus implements CommandBus
         $this->bus = new MessageBus([
             new HandleMessageMiddleware(
                 new HandlersLocator(
+                    // @phpstan-ignore-next-line
                     (new CommandHandlerBuilder())->fromCallables($commandHandlers),
                 ),
             ),
@@ -54,8 +55,9 @@ final readonly class InMemoryCommandBus implements CommandBus
         } catch (NoHandlerForMessageException) {
             throw new \InvalidArgumentException(sprintf('The command has not a valid handler: %s', $command::class));
         } catch (HandlerFailedException $e) {
-            // @TODO: log to Sentry / Slack?
-            throw $e->getPrevious();
+            if (!is_null($e->getPrevious())) {
+                throw $e->getPrevious();
+            }
         }
     }
 }

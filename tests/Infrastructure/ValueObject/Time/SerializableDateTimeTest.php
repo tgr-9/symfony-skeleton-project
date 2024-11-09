@@ -17,13 +17,6 @@ class SerializableDateTimeTest extends TestCase
         );
     }
 
-    public function testFromOptionalString(): void
-    {
-        $this->assertNull(
-            SerializableDateTime::fromOptionalString('')
-        );
-    }
-
     public function testFromTimeStamp(): void
     {
         $this->assertEquals(
