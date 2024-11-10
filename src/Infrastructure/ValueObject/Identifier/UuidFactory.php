@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ValueObject\Identifier;
 
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
+use Ramsey\Uuid\Uuid as RamseyUuid;
 
 class UuidFactory
 {
-    public function generate(): UuidInterface
+    public static function random(): string
     {
-        return Uuid::uuid4();
+        return RamseyUuid::uuid4()->toString();
     }
 }
