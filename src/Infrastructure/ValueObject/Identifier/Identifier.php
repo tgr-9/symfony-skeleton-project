@@ -21,6 +21,6 @@ abstract readonly class Identifier extends NonEmptyStringLiteral implements \Jso
 
     public static function random(): static
     {
-        return new static(static::getPrefix().UuidFactory::random());
+        return static::fromString(static::getPrefix().UuidFactory::random());
     }
 }
