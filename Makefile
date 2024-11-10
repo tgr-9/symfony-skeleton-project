@@ -21,6 +21,12 @@ down:
 console:
 	@make dcr cmd="bin/console $(arg)"
 
+migrate-diff:
+	@make console arg="doctrine:migrations:diff"
+
+migrate-run:
+	@make console arg="doctrine:migrations:migrate"
+
 phpunit:
 	@make dcr cmd="vendor/bin/phpunit -d --enable-pretty-print -d --compact $(arg)"
 
@@ -32,7 +38,3 @@ composer:
 
 csfix:
 	@make dcr cmd="vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php"
-migrate-generate:
-	vendor/bin/doctrine-migrations generate
-migrate-run:
-	vendor/bin/doctrine-migrations migrate
