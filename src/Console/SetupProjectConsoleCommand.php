@@ -44,11 +44,18 @@ final class SetupProjectConsoleCommand extends Command
             $this->filesystem->delete('config/packages/doctrine.yaml');
             $this->filesystem->delete('config/packages/doctrine_migrations.yaml');
 
-            $process = new Process(['composer', 'remove', 'adrenalinkin/doctrine-naming-strategy']);
-            $process->run();
+            $packagesToRemove = [
+                'adrenalinkin/doctrine-naming-strategy',
+                'doctrine/orm',
+                'doctrine/doctrine-migrations-bundle',
+                'doctrine/doctrine-bundle',
+                'doctrine/dbal',
+            ];
 
-            $process = new Process(['composer', 'remove', 'doctrine/orm']);
-            $process->run();
+            foreach ($packagesToRemove as $package) {
+                $process = new Process(['composer', 'remove', $package]);
+                $process->run();
+            }
 
             unset($dockerComposeYml['services']['mysql']);
         } else {
