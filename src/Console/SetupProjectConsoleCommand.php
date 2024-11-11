@@ -57,6 +57,7 @@ final class SetupProjectConsoleCommand extends Command
                 $process->run();
             }
 
+            unset($dockerComposeYml['services']['php-cli']['depends_on']);
             unset($dockerComposeYml['services']['mysql']);
         } else {
             $io->info('Do not forget to set the database name in ".env" and "/docker/mysql/mysql.init.sql"');
