@@ -6,6 +6,7 @@ Open `.env` and set following ENV VARIABLES:
 
 ```
 DOCKER_CONTAINER_BASE_NAME=skeleton
+DOCKER_MYSQL_PORT=3306
 DOCKER_NGINX_PORT=8081
 ```
 
@@ -15,6 +16,17 @@ If this a CLI-only application, remove references to PHP-FPM and Nginx:
 * docker/nginx
 * remove services `php-fpm` & `nginx` from `docker-composer.yml`
 
+Update the database name of your application:
+
+* docker/mysql
+* .env DATABASE_URL
+
+If you don't need database functionality you can remove these references:
+
+* docker/mysql
+* .env DATABASE_URL
+* `make composer arg="remove doctrine/orm"`
+* `make composer arg="remove adrenalinkin/doctrine-naming-strategy"`
 
 ```bash
 # Build docker containers
