@@ -60,6 +60,8 @@ final class SetupProjectConsoleCommand extends Command
             inline: 10,
         ));
 
+        $io->info('Do not forget to delete this console command');
+
         return Command::SUCCESS;
     }
 }
