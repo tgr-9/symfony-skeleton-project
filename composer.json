@@ -30,7 +30,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.64",
-        "phpstan/phpstan": "*",
+        "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^11.4",
         "spatie/phpunit-snapshot-assertions": "^5.1",
         "symfony/phpunit-bridge": "^7.1"

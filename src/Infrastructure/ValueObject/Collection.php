@@ -61,6 +61,20 @@ abstract class Collection implements \Countable, \IteratorAggregate, \JsonSerial
     }
 
     /**
+     * @return Collection<T>
+     */
+    public function remove(int|string $index): self
+    {
+        if (array_key_exists($index, $this->items)) {
+            unset($this->items[$index]);
+        }
+
+        $this->items = array_values($this->items);
+
+        return $this;
+    }
+
+    /**
      * @param Collection<T> $collection
      *
      * @return Collection<T>
@@ -144,11 +158,13 @@ abstract class Collection implements \Countable, \IteratorAggregate, \JsonSerial
 
     public function sum(\Closure $closure): int|float
     {
+        // @phpstan-ignore-next-line
         return array_sum($this->map(fn ($item): int|float => $closure($item)));
     }
 
     public function max(\Closure $closure): mixed
     {
+        // @phpstan-ignore-next-line
         return max($this->map(fn ($item): int|float => $closure($item)));
     }
 
@@ -164,6 +180,7 @@ abstract class Collection implements \Countable, \IteratorAggregate, \JsonSerial
 
     public function usort(\Closure $closure): static
     {
+        // @phpstan-ignore-next-line
         usort($this->items, function ($a, $b) use ($closure) {
             return $closure($a, $b);
         });
