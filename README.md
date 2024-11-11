@@ -25,6 +25,7 @@ If you don't need database functionality you can remove these references:
 
 * docker/mysql
 * .env DATABASE_URL
+* remove service `mysql` from `docker-composer.yml`
 * `make composer arg="remove doctrine/orm"`
 * `make composer arg="remove adrenalinkin/doctrine-naming-strategy"`
 
