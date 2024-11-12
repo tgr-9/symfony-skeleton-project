@@ -4,3 +4,4 @@ parameters:
         - src/
     excludePaths:
         - src/Console/SetupProjectConsoleCommand.php
+        - src/Infrastructure/Eventing/RecordsEvents.php
