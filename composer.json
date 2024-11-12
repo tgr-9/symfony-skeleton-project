@@ -18,6 +18,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.3",
+        "ext-bcmath": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "adrenalinkin/doctrine-naming-strategy": "^3.0",
