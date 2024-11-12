@@ -1,6 +1,19 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
+    "name": "robiningelbrecht/symfony-skeleton",
+    "description": "A Symfony skeleton I use to bootstrap new projects",
+    "authors": [
+        {
+            "name": "Robin Ingelbrecht",
+            "email": "ingelbrecht_robin@hotmail.com"
+        }
+    ],
+    "keywords": [
+        "PHP",
+        "Symfony",
+        "Skeleton"
+    ],
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
