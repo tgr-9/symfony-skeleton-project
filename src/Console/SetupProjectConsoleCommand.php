@@ -29,6 +29,7 @@ final class SetupProjectConsoleCommand extends Command
         $dockerComposeYml = Yaml::parse($this->filesystem->read('docker-compose.yml'));
 
         $io->title('Setup project');
+        $warnings = [];
 
         if (!$io->confirm('Do you want to setup PHP-FPM and Nginx?', false)) {
             $this->filesystem->deleteDirectory('docker/php-fpm');
@@ -61,7 +62,7 @@ final class SetupProjectConsoleCommand extends Command
             }
             unset($dockerComposeYml['services']['mysql']);
         } else {
-            $io->info('Do not forget to set the database name in ".env" and "/docker/mysql/mysql.init.sql"');
+            $warnings[] = 'Do not forget to set the database name in ".env DATABASE_URL" and "/docker/mysql/mysql.init.sql"';
         }
 
         $this->filesystem->write('docker-compose.yml', Yaml::dump(
@@ -69,7 +70,8 @@ final class SetupProjectConsoleCommand extends Command
             inline: 10,
         ));
 
-        $io->info('Do not forget to delete this console command');
+        $warnings[] = 'Do not forget to delete this console command';
+        $io->warning($warnings);
 
         return Command::SUCCESS;
     }
