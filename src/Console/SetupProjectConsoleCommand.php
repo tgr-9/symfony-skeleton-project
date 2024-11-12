@@ -43,13 +43,11 @@ final class SetupProjectConsoleCommand extends Command
             $this->filesystem->deleteDirectory('migrations');
             $this->filesystem->delete('config/packages/doctrine.yaml');
             $this->filesystem->delete('config/packages/doctrine_migrations.yaml');
+            $this->filesystem->deleteDirectory('config/packages/doctrine');
 
             $packagesToRemove = [
                 'adrenalinkin/doctrine-naming-strategy',
-                'doctrine/orm',
-                'doctrine/doctrine-migrations-bundle',
-                'doctrine/doctrine-bundle',
-                'doctrine/dbal',
+                'doctrine/*',
             ];
 
             foreach ($packagesToRemove as $package) {
@@ -58,6 +56,9 @@ final class SetupProjectConsoleCommand extends Command
             }
 
             unset($dockerComposeYml['services']['php-cli']['depends_on']);
+            if (isset($dockerComposeYml['services']['nginx']['depends_on'])) {
+                unset($dockerComposeYml['services']['nginx']['depends_on']);
+            }
             unset($dockerComposeYml['services']['mysql']);
         } else {
             $io->info('Do not forget to set the database name in ".env" and "/docker/mysql/mysql.init.sql"');
