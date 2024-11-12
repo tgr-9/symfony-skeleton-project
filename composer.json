@@ -11,8 +11,8 @@
     ],
     "keywords": [
         "PHP",
-        "Symfony",
-        "Skeleton"
+        "symfony",
+        "skeleton"
     ],
     "minimum-stability": "stable",
     "prefer-stable": true,
