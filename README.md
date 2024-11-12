@@ -46,3 +46,7 @@ DOCKER_NGINX_PORT=8081
       // ...
     }
 ```
+
+## TODO
+
+* Use [league/event](https://event.thephpleague.com/3.0/) in favor of own eventing
