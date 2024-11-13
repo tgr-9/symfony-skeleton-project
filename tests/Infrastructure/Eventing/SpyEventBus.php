@@ -22,6 +22,9 @@ class SpyEventBus implements EventBus
      */
     public function getPublishedEvents(): array
     {
-        return $this->eventsToPublish;
+        $eventsToPublish = $this->eventsToPublish;
+        $this->eventsToPublish = [];
+
+        return $eventsToPublish;
     }
 }
