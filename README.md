@@ -34,6 +34,19 @@ DOCKER_NGINX_PORT=8081
 ```bash
 # Build docker containers
 > make build-containers
+
+
+# Run test suite
+> make phpunut
+# Run cs fixer
+> make csfix
+# Run PHPstan
+> make phpstan
+# Create and run migrations
+> make migrate-diff
+> make migrate-run
+# Run a console command
+> make console arg="your:fancy:command"
 ```
 
 ## Events
