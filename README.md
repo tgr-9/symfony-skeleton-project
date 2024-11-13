@@ -34,8 +34,13 @@ DOCKER_NGINX_PORT=8081
 ```bash
 # Build docker containers
 > make build-containers
+```
 
+## Make file
 
+There are some predefined commands in the make file. You can use them as such:
+
+```bash
 # Run test suite
 > make phpunut
 # Run cs fixer
