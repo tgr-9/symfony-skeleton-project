@@ -36,7 +36,7 @@ DOCKER_NGINX_PORT=8081
 > make build-containers
 ```
 
-## Make file
+## Makefile
 
 There are some predefined commands in the `Makefile`. You can use them as such:
 
