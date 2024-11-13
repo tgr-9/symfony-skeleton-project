@@ -52,7 +52,7 @@ class User
     ): self {
         // ...
         $user->recordThat(new UserWasCreated(
-            solveId: $user->getUserId(),
+            userId: $user->getUserId(),
         ));
 
         return $user;
