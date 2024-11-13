@@ -114,7 +114,7 @@ framework:
 
 ## Apply a limiter to a route
 
-Then a apply it to the necessary routes:
+Then apply it to the necessary routes:
 
 ```php
     #[RateLimiter('anonymous')]
