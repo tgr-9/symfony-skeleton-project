@@ -42,7 +42,7 @@ There are some predefined commands in the make file. You can use them as such:
 
 ```bash
 # Run test suite
-> make phpunut
+> make phpunit
 # Run cs fixer
 > make csfix
 # Run PHPstan
