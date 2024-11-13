@@ -38,7 +38,7 @@ DOCKER_NGINX_PORT=8081
 
 ## Makefile
 
-There are some predefined commands in the `Makefile`. You can use them as such:
+There are some predefined commands in the `Makefile`:
 
 ```bash
 # Run test suite
