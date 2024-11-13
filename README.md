@@ -99,6 +99,23 @@ More info: [https://symfony.com/doc/current/event_dispatcher.html#defining-event
 
 ## Rate Limiter
 
+## Create a Rate Limiter
+
+Define a new rate limiter in `config/packages/rate_limiter.yaml`:
+
+```yml
+framework:
+  rate_limiter:
+    anonymous:
+      policy: 'sliding_window'
+      limit: 100
+      interval: '60 minutes'
+```
+
+## Apply a limiter to a route
+
+Then a apply it to the necessary routes:
+
 ```php
     #[RateLimiter('anonymous')]
     #[Route(path: '/your/important/route', methods: ['GET', 'POST'])]
@@ -107,3 +124,5 @@ More info: [https://symfony.com/doc/current/event_dispatcher.html#defining-event
       // ...
     }
 ```
+
+more info: [https://symfony.com/doc/current/rate_limiter.html](https://symfony.com/doc/current/rate_limiter.html)
