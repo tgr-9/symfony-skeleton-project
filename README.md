@@ -36,6 +36,67 @@ DOCKER_NGINX_PORT=8081
 > make build-containers
 ```
 
+## Events
+
+### Recording Events
+
+In your entity `use RecordsEvents;` and record events when needed:
+
+```php
+class User
+{
+    use RecordsEvents;
+    
+    public static function create(
+        UserId $id,
+    ): self {
+        // ...
+        $user->recordThat(new UserWasCreated(
+            solveId: $user->getUserId(),
+        ));
+
+        return $user;
+    }
+}
+```
+
+### Publishing Events
+
+In your repository, inject the `EventBus` and publish the recorded events:
+
+```php
+final readonly class UserRepository implements CommandHandler
+{
+    public function __construct(
+        private EventBus $eventBus,
+    ) {
+    }
+    
+    public function save(User $user): void
+    {
+        // ...
+        $this->eventBus->publishEvents($user->getRecordedEvents());
+    }    
+
+```
+
+### Registering Event Listeners
+
+Create a manager / event listener and add the `AsEventListener` attribute:
+
+```php
+final readonly class UserEmailManager
+{
+    #[AsEventListener]
+    public function reactToUserWasCreated(UserWasCreated $event): void
+    {
+        // ...
+    }
+}
+```
+
+More info: [https://symfony.com/doc/current/event_dispatcher.html#defining-event-listeners-with-php-attributes](https://symfony.com/doc/current/event_dispatcher.html#defining-event-listeners-with-php-attributes)
+
 ## Rate Limiter
 
 ```php
@@ -46,7 +107,3 @@ DOCKER_NGINX_PORT=8081
       // ...
     }
 ```
-
-## TODO
-
-* Use [league/event](https://event.thephpleague.com/3.0/) in favor of own eventing
